@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import clsx from 'clsx';
@@ -32,7 +32,11 @@ export const ArticleParamsForm = ({
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const rootRef = useRef<HTMLDivElement>(null);
 	const [selectArticleState, setSelectArticleState] =
-		useState<ArticleStateType>(currentArticleState);
+		useState<ArticleStateType>(defaultArticleState);
+
+	useEffect(() => {
+		setSelectArticleState(currentArticleState);
+	}, [currentArticleState]);
 
 	const handleChange = (key: keyof ArticleStateType, value: OptionType) => {
 		setSelectArticleState({ ...selectArticleState, [key]: value });
